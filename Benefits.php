@@ -33,7 +33,7 @@
         <section class="selector">
             <div class="selector">
                 <div class="image-container">
-                    <img src="./img/connect.png" alt="">
+                    <img src="./img/sample2.svg" alt="">
                 </div>
                 <div class="text-container">
                     <h2>Get email notifications for important dates</h2><br/><br/><br/>

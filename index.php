@@ -198,7 +198,6 @@
                 </div>
             </div>
         </section>
-   
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
     <script>
