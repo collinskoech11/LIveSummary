@@ -59,7 +59,7 @@
             </div>
             <div class="desc-container">
                 <h1 class="text" style="color:rgb(155,155,250)">We've got covered</h1>
-                <h2 class="typing">Live Summary helps students, teachers, and schools access the tools<br/> and events they need to shape the next generation of software development.</h2>
+                <h2 class="typing">Live Summary helps students, teachers, and schools access the tools<br/> and events they need to shape the next generation of proffesional study.</h2>
             </div>
         </section>
         <section class="Difference">
