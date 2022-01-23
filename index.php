@@ -15,11 +15,11 @@
             <div class="header-container">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
-                    <a href="/Read"><button>Reader</button></a>
-                    <a href="/Write"><button>Writer</button></a>
-                    <a href="/Benefits"><button>Benefits</button></a>
-                    <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign">Sign in</button></a>
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
+                    <a href="Benefits.php"><button>Benefits</button></a>
+                    <a href="Contact.php"><button>Contact us</button></a>
+                    <a href="Login.php"><button class="sign">Sign in</button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -34,19 +34,19 @@
                     <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Reader</button>
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Writer</button>
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Benefits</button>
+                    <a href="Benefits.php"><button>Benefits</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Contact</button>
+                    <a href="Contact.php"><button>Contact</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Sign in</button>
+                    <a href="Login.php"><button>Sign in</button></a>
                 </div>
             </div>
         </section>
@@ -88,14 +88,30 @@
                 <h2>Come and connect, learn, and grow with the Live Summary student community on Campus.</h2>
             </div>
         </section>
+        <?php
+            $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+              // Check connection
+             if($mysqli === false){
+                 die("ERROR: Could not connect. " 
+                     . mysqli_connect_error());
+             }
+             $sql = "SELECT * FROM articles";
+             $result = $mysqli->query($sql);
+             $mysqli->close();
+        ?>
         <section id="BodyContainer">
-            <div class="body-con">
-                <% articles.forEach(article => { %>        
+            <div class="body-con">    
+                <?php
+                $x = 1;
+                while($rows=$result->fetch_assoc()){ 
+                    $x++;
+                    if($x<4){
+                ?>   
                     <div class="card mt-4">
                         <div class="card-body">
-                            <h4 class="card-title"><%= article.title %></h4> 
-                            <div class="card-subtitle text-muted mb-2"> <%= article.createdAt.toLocaleDateString() %></div>
-                            <div class="card-text mb-2"> <%= article.description %></div>
+                            <h4 class="card-title"><?php echo $rows['article_title'];?></h4> 
+                            <div class="card-subtitle text-muted mb-2"> <?php echo $rows['created_at'];?></div>
+                            <div class="card-text mb-2"> <?php echo $rows['username'];?></div>
                             <div class="btn-container">
                                 <button class="read"><a href="articles/<%= article.slug %>" class="btn btn-primary">Read full article</a></button>
                                 <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
@@ -105,7 +121,10 @@
                             </div>
                         </div>      
                     </div>
-                <%  }) %>
+                <?php
+                    }
+                   }
+                ?>
             </div>
         </section>
         <section id="Desc-Container">
@@ -200,37 +219,7 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY >= 100);
-        });
-        document.getElementById("navigate").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.toggle('appear')
-            })
-            document.getElementById("closer").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.remove('appear')
-            
-            })
-        var i =0, text;
-        text = " and events they need to shape the next generation of software development."
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
 ?>

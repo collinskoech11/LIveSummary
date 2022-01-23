@@ -16,18 +16,39 @@
             <div class="header-container">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
-                    <a href="/"><button>Home</button></a>
-                    <a href="/Write"><button>Writer</button></a>
-                    <a href="/Benefits"><button>Benefits</button></a>
-                    <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign">Sign in</button></a>
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
+                    <a href="Benefits.php"><button>Benefits</button></a>
+                    <a href="Contact.php"><button>Contact us</button></a>
+                    <a href="Login.php"><button class="sign">Sign in</button></a>
+                </div>
+                <div class="title-nav-btn" id="navigate">
+                    <div class="nav-line"></div>   
+                    <div class="nav-line"></div>  
+                    <div class="nav-line"></div>           
                 </div>
             </div>
         </section>
-        <section id="Desc-Container">
-            <div class="desc-container">
-                <h1 class="text" style="color:rgb(155,155,250)">Get started with study</h1>
-                <h2>Come and connect, learn, and grow with the Live Summary student community on Campus</h2>
+        <section class="SideNav">
+            <div class="side-nav">
+                <div class="side-nav-close">
+                    <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
+                </div>
+                <div class="side-nav-btn">
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
+                </div>
+                <div class="side-nav-btn">
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
+                </div>
+                <div class="side-nav-btn">
+                    <a href="Benefits.php"><button>Benefits</button></a>
+                </div>
+                <div class="side-nav-btn">
+                    <a href="Contact.php"><button>Contact</button></a>
+                </div>
+                <div class="side-nav-btn">
+                    <a href="Login.php"><button>Sign in</button></a>
+                </div>
             </div>
         </section>
         <section class="selector">
