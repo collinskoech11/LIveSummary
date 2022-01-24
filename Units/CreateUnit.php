@@ -1,6 +1,8 @@
 <?php
-   include('../variables.php');
+    session_start();
+    include('../variables.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +12,39 @@
     <title>Blog</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .cold{
-            color:gray;
+        /* .form-container{
+            width:100%;
+            height:auto;
+            padding:50px;
         }
+        @media screen and (max-width:1000px){
+            .form-container{
+                padding:20px;
+            }
+        }
+        .form-container form{
+            width:100%;
+        }
+        .form-container form input{
+            width:100%;
+            margin-bottom:40px;
+            height:50px;
+            background-color:rgb(0,0,10);
+            border: 3px solid rgb(155,155,250);
+            border-radius:5px;
+            padding-left:13px;
+            color:#fff;
+
+        }
+        .form-container form textarea{
+            width:100%;
+            height:500px;
+            background-color:rgb(0,0,10);
+            border: 3px solid rgb(155,155,250);
+            border-radius:5px;
+            padding:13px;
+            color:#fff;
+        } */
     </style>
 </head>
 <body>
@@ -25,7 +57,7 @@
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming ?></button></a>
+                    <a href="#"><button class="sign"><?php echo $Naming;?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -37,7 +69,7 @@
         <section class="SideNav">
             <div class="side-nav">
                 <div class="side-nav-close">
-                    <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
+                    <div class="close-btn" id="closer"><img src="../img/close.png" alt=""></div>
                 </div>
                 <div class="side-nav-btn">
                     <button>Reader</button>
@@ -52,41 +84,46 @@
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming ?></button>
+                    <button>Sign in</button>
                 </div>
             </div>
         </section>
-        <section class="BodyContainer">
-            <div class="user" style="margin-top:75px;display:flex">
-            <?php 
-                        while($rowuser=$resultuser->fetch_assoc()){
+        <section class="contentForm">
+        <?php
+            include("../Database/db.php");
+            if (isset($_REQUEST['unit_id'])){
+                $unit_id = $_REQUEST['unit_id'];
+                $unit_name = $_REQUEST['unit_name'];
+                $course_name = $_REQUEST['course_name'];
+                $faculty = $_REQUEST['faculty'];
+               
 
-                    ?>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <img src="https://cdn4.iconfinder.com/data/icons/aami-web-internet/64/aami14-41-512.png" alt=""style="width:150px;height:150px;">
-                        </div>      
-                    </div>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h3 class="card-title"><span class="cold">Name </span>: <?php echo $Naming ?>  |  <span class="cold">Reg No   </span>: <?php echo $rowuser['user_id']?></h3> <br/>
-                            <h4 class="card-title"> <span class="cold">Course   </span>: <?php echo $rowuser['course']?> | <span class="cold">Role   </span>: <?php echo $rowuser['role']?></h4> 
-                            <div class="card-subtitle text-muted mb-2"> Email : <?php echo $rowuser['email']?></div>
-    
-                            <div class="btn-container">
-                                <button class="read"><a href="../Logout.php" class="btn btn-primary">Log Out</a></button>
-                                <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
-                                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-                                    <button type="submit" class="btn btn-danger delete">DELETE</button>
-                                </form> -->
-                            </div>
-                        </div>      
-                    </div>
-                    
-                    <?php
-                        }
-                    ?>
+                $sql = "INSERT INTO units VALUES ('$unit_id','$unit_name','$course_name','$faculty')";
+                $result = mysqli_query($conn, $sql);
+
+                if ($result){
+                    echo " <div class='form-container'> SUCCESSFULLY SAVED THE DATA'<br/>
+                    <a href='../Dashboard/index.php'>log in</a>
+                    </div>";
+                } else {
+                    echo " <div class='form-container' style='backgound-color:rgb(0,0,10);'>SOMETHING'S MISSING'<br/>
+                    <a href='Create.php'>Write again</a>
+                    </div>".$sql;
+                }
+            } else {
+            ?>
+            <div class="form-container" style="margin-top:50px;">
+                <form name="Create_Article" method="POST">
+                    <input type="text" name="unit_id" id="unit_id" placeholder="Unit id">
+                    <input type="text" name="unit_name" id="unit_name" placeholder="Unit Name">
+                    <input type="text" placeholder="Course Name" name="course_name" id="course_name">
+                    <input type="text" placeholder="Faculty" name="faculty" id="faculty">
+                    <input type="submit" value="Submit" class="sign" style="width:150px; margin-top:30px;">
+                </form>
             </div>
+            <?php
+                }
+            ?>
         </section>
         <section class="FooterContainer">
             <div class="footer-container">

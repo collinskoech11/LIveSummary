@@ -1,5 +1,15 @@
 <?php
-   include('../variables.php');
+    $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+     // Check connection
+    session_start();
+    if($mysqli === false){
+        die("ERROR: Could not connect. " 
+            . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM articles";
+    $result = $mysqli->query($sql);
+    $mysqli->close();
+    include('../variables.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +20,47 @@
     <title>Blog</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .cold{
-            color:gray;
+        .tab-wrap{
+            border-radius:20px;
+            background-color:rgb(0,0,20 );
+            width:90%;
+            margin:auto;
+            margin-top:20px;
+            padding-top:10px;
+            padding-left:30px;
+            padding-right:30px;
+            padding-bottom:20px;
+            height:auto;
+            text-align:center;
+            color:#fff;
+            
         }
+        .tab-wrap table{
+            margin:auto;
+            margin-top:30px;
+        }
+        .tab-wrap table tr{
+            border-top:2px solid rgb(155,155,250);
+        }
+        .tab-wrap table th,td{
+            border-left:2px solid rgb(155,155,250);
+            border-top:3px solid rgb(155,155,250);
+            height: 50px;
+            width:200px;
+            text-align: center;
+            color:#fff;
+            
+        }
+        .tab-wrap table .Bend{
+            border-top-left-radius:10px;
+        }
+        .tab-wrap table  .Closet{
+            border-right:2px solid rgb(155,155,250);
+        }
+        .tab-wrap table  th .Close{
+            border-top-right-radius:10px;
+        }
+        
     </style>
 </head>
 <body>
@@ -25,7 +73,7 @@
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming ?></button></a>
+                    <a href="#"><button class="sign"><?php echo $Naming;?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -52,40 +100,39 @@
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming ?></button>
+                    <button><?php echo $Naming;?></button>
                 </div>
             </div>
         </section>
-        <section class="BodyContainer">
-            <div class="user" style="margin-top:75px;display:flex">
-            <?php 
-                        while($rowuser=$resultuser->fetch_assoc()){
-
-                    ?>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <img src="https://cdn4.iconfinder.com/data/icons/aami-web-internet/64/aami14-41-512.png" alt=""style="width:150px;height:150px;">
-                        </div>      
-                    </div>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h3 class="card-title"><span class="cold">Name </span>: <?php echo $Naming ?>  |  <span class="cold">Reg No   </span>: <?php echo $rowuser['user_id']?></h3> <br/>
-                            <h4 class="card-title"> <span class="cold">Course   </span>: <?php echo $rowuser['course']?> | <span class="cold">Role   </span>: <?php echo $rowuser['role']?></h4> 
-                            <div class="card-subtitle text-muted mb-2"> Email : <?php echo $rowuser['email']?></div>
-    
-                            <div class="btn-container">
-                                <button class="read"><a href="../Logout.php" class="btn btn-primary">Log Out</a></button>
-                                <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
-                                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-                                    <button type="submit" class="btn btn-danger delete">DELETE</button>
-                                </form> -->
-                            </div>
-                        </div>      
-                    </div>
+        <section class="tab-container">
+            <div class="tab-wrap">
+                <h2>ALL OUR ARTICLES</h2>
+                <table>
+                    <tr>
+                        <th class="Bend">Article Id</th>
+                        <th>User Id</th>
+                        <th>Username</th>
+                        <th>Article Title</th>
+                        <th>Unit Title</th>
+                        <th>Course</th>
                     
+                    </tr>
+                    <?php 
+                        while($rows=$result->fetch_assoc()){
+                    ?>
+                    <tr>
+                        <td><?php echo $rows['article_id']?></td>
+                        <td><?php echo $rows['user_id']?></td>
+                        <td><?php echo $rows['username']?></td>
+                        <td><?php echo $rows['article_title']?></td>
+                        <td><?php echo $rows['unit_title']?></td>
+                        <td><?php echo $rows['course']?></td>
+                        
+                    </tr>
                     <?php
                         }
                     ?>
+                </table>
             </div>
         </section>
         <section class="FooterContainer">

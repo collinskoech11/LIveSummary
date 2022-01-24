@@ -8,6 +8,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .btn-swap{
+            position: fixed;
+            top: 70px;
+            right: 20px;
+        }
+        .side-navo{
+            position:fixed;
+            top: 70px;
+            right: 0;
+            height: 100vh;
+            width: 40vw ;
+            z-index: 100000000;
+            /*border: 3px solid rgb(155,155,250);*/
+            display:none;
+            
+        }
+        .display{
+            display: block;
+        }
+        .block{
+            width: 100%;
+            display: flex;
+            height: 90px;
+            border-top: 3px solid  rgb(155,155,250);
+            border-left: 3px solid  rgb(155,155,250);
+            border-top-left-radius: 15px;
+            background-color: rgb(0,0,10);
+            text-align: center;
+            padding-top: 20px;
+            padding-left: 20px;
+        }
+        .block a{
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .block a button{
+            width: 100px;
+            height: 50px;
+            background-color: rgb(0, 0, 10);
+            border: 3px solid   rgb(155,155,250);
+            color:  rgb(155,155,250);
+            border-radius: 5px;
+            margin: auto;
+            marign-top: 20px;
+        }
+        #closero,#activate{
+           width: 100px;
+            height: 50px;
+            background-color: rgb(0, 0, 10);
+            border: 3px solid   rgb(155,155,250);
+            color:  rgb(155,155,250);
+            border-radius: 5px;
+            margin: auto;
+            marign-top: 20px; 
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -19,7 +77,7 @@
                     <a href="Articles/ArticleList.php"><button>Writer</button></a>
                     <a href="Benefits.php"><button>Benefits</button></a>
                     <a href="Contact.php"><button>Contact us</button></a>
-                    <a href="Login.php"><button class="sign">Sign in</button></a>
+                    <?php if($Naming){ ?><a href="Login.php"><button class="sign"><?php echo $Naming ?></button></a><?php } else {  ?><button class="sign">Sign In</button><?php } ?>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -48,6 +106,21 @@
                 <div class="side-nav-btn">
                     <a href="Login.php"><button>Sign in</button></a>
                 </div>
+            </div>
+        </section>
+        <section>
+            <div class="btn-swap">
+                <button class="sign" id="activate" >More</button>
+            </div>
+        </section>
+        <section class="SideNav">
+            <div class="side-navo">
+                <div class="block"><button id="closero" style="color:#fff; font-weight: bold; text-transform: uppercase;">Close</button></div>
+                <div class="block"><a href="">Tables : <button>Users</button> <button>Articles</button> <button>Courses</button> <button>Units</button></a></div>
+                <div class="block"><a href="">Units : <button>All Units</button> <button>Create Unit</button></a></div>
+                <div class="block"><a href="">Articles : <button>All Articles</button> <button>Write Article</button> </a></div>
+                <div class="block"><a href="">Courses : <button>All Courses</button> <button>Create Course</button></a></div>
+                <div class="block"><a href="">Reports : <button>Readers</button> <button>Writers</button></a></div>
             </div>
         </section>
         <section id="Desc-Container">
@@ -113,7 +186,7 @@
                             <div class="card-subtitle text-muted mb-2"> <?php echo $rows['created_at'];?></div>
                             <div class="card-text mb-2"> <?php echo $rows['username'];?></div>
                             <div class="btn-container">
-                                <button class="read"><a href="articles/<%= article.slug %>" class="btn btn-primary">Read full article</a></button>
+                                <button class="read"><a href="articles/<%= article.slug %>" class="btn btn-primary">Read </a></button>
                                 <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
                                 <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
                                     <button type="submit" class="btn btn-danger delete">DELETE</button>
@@ -219,7 +292,22 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
+    <script>
+        
+        document.getElementById("activate").addEventListener('click',
+        function(){
+                var thescript = document.querySelector(".side-navo");
+                thescript.classList.toggle('display')
+            })
+document.getElementById("closero").addEventListener('click',
+            function(){
+                var thescript = document.querySelector(".side-navo");
+                thescript.classList.remove('display')
+            
+            })
+    </script>
     <script src="./js/script.js"></script>
+    
 </body>
 </html>
 ?>
