@@ -9,13 +9,13 @@
     },
     "windowsState": {
         "lastActiveWindow": {
-            "folder": "file:///var/www/html/project",
-            "backupPath": "/home/collins/Documents/LIveSummary/Backups/66fda65819d6091728054dda71176cb8",
+            "folder": "file:///home/collins/Documents/LIveSummary",
+            "backupPath": "/home/collins/Documents/LIveSummary/Backups/05d8d30e23b18db7fc185c56909ae728",
             "uiState": {
                 "mode": 1,
-                "x": 0,
+                "x": 803,
                 "y": 61,
-                "width": 804,
+                "width": 805,
                 "height": 788
             }
         },
@@ -157,8 +157,7 @@
                     },
                     {
                         "id": "workbench.action.toggleAutoSave",
-                        "label": "A&&uto Save",
-                        "checked": true
+                        "label": "A&&uto Save"
                     },
                     {
                         "id": "submenuitem.23",
