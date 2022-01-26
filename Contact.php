@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -121,25 +121,6 @@
    
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY > 100);
-        })
-        var i =0, text;
-        text = "Come and connect, learn, and grow with the Live Summary student community on Campus"
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>

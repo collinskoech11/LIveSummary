@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -51,19 +51,6 @@
                 </div>
             </div>
         </section>
-        <section class="selector">
-            <div class="selector">
-                <div class="image-container">
-                    <img src="./img/sample2.svg" alt="">
-                </div>
-                <div class="text-container">
-                    <h2>Get email notifications for important dates</h2><br/><br/><br/>
-                    <h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur, architecto. Voluptate nam neque quo in laboriosam ipsa temporibus laborum veritatis reprehenderit? Hic officiis mollitia inventore modi fugit fugiat, eius soluta!</h4><br/><br/>
-                    <h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur, architecto. Voluptate nam neque quo in laboriosam ipsa temporibus laborum veritatis reprehenderit? Hic officiis mollitia inventore modi fugit fugiat, eius soluta!</h4><br/><br/>
-                    <h3><a href="">Join the mailing list</a></h3>
-                </div>
-            </div>
-        </section>
         <section class="Difference">
             <div class="difference">
                 <div class="difference-container">
@@ -81,6 +68,19 @@
 
                     <h4> Build a tech community at your school with training and support from GitHub. Campus Experts learn public speaking, technical writing, community leadership, and software development skills that will help you improve your campus.</h4>
                     <a href=""><h2>Become a Reader </h2></a>
+                </div>
+            </div>
+        </section>
+        <section class="selector">
+            <div class="selector">
+                <div class="image-container">
+                    <img src="./img/sample2.svg" alt="">
+                </div>
+                <div class="text-container">
+                    <h2>Get email notifications for important dates</h2><br/><br/><br/>
+                    <h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur, architecto. Voluptate nam neque quo in laboriosam ipsa temporibus laborum veritatis reprehenderit? Hic officiis mollitia inventore modi fugit fugiat, eius soluta!</h4><br/><br/>
+                    <h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur, architecto. Voluptate nam neque quo in laboriosam ipsa temporibus laborum veritatis reprehenderit? Hic officiis mollitia inventore modi fugit fugiat, eius soluta!</h4><br/><br/>
+                    <h3><a href="">Join the mailing list</a></h3>
                 </div>
             </div>
         </section>
@@ -136,13 +136,6 @@
    
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY > 100);
-        })
-        console.log('hello')
-    </script>
+    <script src="js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
