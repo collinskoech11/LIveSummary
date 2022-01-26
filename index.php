@@ -7,64 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?<?php echo time(); ?>">
     <style>
-        .btn-swap{
-            position: fixed;
-            top: 70px;
-            right: 20px;
-        }
-        .side-navo{
-            position:fixed;
-            top: 70px;
-            right: 0;
-            height: 100vh;
-            width: 40vw ;
-            z-index: 100000000;
-            /*border: 3px solid rgb(155,155,250);*/
-            display:none;
-            
-        }
-        .display{
-            display: block;
-        }
-        .block{
-            width: 100%;
-            display: flex;
-            height: 90px;
-            border-top: 3px solid  rgb(155,155,250);
-            border-left: 3px solid  rgb(155,155,250);
-            border-top-left-radius: 15px;
-            background-color: rgb(0,0,10);
-            text-align: center;
-            padding-top: 20px;
-            padding-left: 20px;
-        }
-        .block a{
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .block a button{
-            width: 100px;
-            height: 50px;
-            background-color: rgb(0, 0, 10);
-            border: 3px solid   rgb(155,155,250);
-            color:  rgb(155,155,250);
-            border-radius: 5px;
-            margin: auto;
-            marign-top: 20px;
-        }
-        #closero,#activate{
-           width: 100px;
-            height: 50px;
-            background-color: rgb(0, 0, 10);
-            border: 3px solid   rgb(155,155,250);
-            color:  rgb(155,155,250);
-            border-radius: 5px;
-            margin: auto;
-            marign-top: 20px; 
-        }
+       
     </style>
 </head>
 <body>
@@ -108,7 +53,7 @@
                 </div>
             </div>
         </section>
-        <section>
+        <section class="btn-swapping">
             <div class="btn-swap">
                 <button class="sign" id="activate" >More</button>
             </div>
@@ -116,11 +61,11 @@
         <section class="SideNav">
             <div class="side-navo">
                 <div class="block"><button id="closero" style="color:#fff; font-weight: bold; text-transform: uppercase;">Close</button></div>
-                <div class="block"><a href="">Tables : <button>Users</button> <button>Articles</button> <button>Courses</button> <button>Units</button></a></div>
-                <div class="block"><a href="">Units : <button>All Units</button> <button>Create Unit</button></a></div>
-                <div class="block"><a href="">Articles : <button>All Articles</button> <button>Write Article</button> </a></div>
-                <div class="block"><a href="">Courses : <button>All Courses</button> <button>Create Course</button></a></div>
-                <div class="block"><a href="">Reports : <button>Readers</button> <button>Writers</button></a></div>
+                <div class="block">Tables : <a href="./Tables/Users.php"><button>Users</button></a> <a href="./Tables/Articles.php"> <button>Articles</button></a><a href="./Tables/Courses"> <button>Courses</button></a><a href="./Tables/Units.php"><button>Units</button></a></div>
+                <div class="block">Units : <a href="./Units/UnitList.php"><button>All Units</button></a> <a href="./Units/CreateUnit.php"> <button>Create Unit</button></a></div>
+                <div class="block">Articles : <a href="./Articles/ArticleList.php"><button>All Articles</button></a> <a href="./Articles/CreateArticle.php"> <button>Write Article</button> </a></div>
+                <div class="block">Courses : <a href="./Courses/CourseList.php"><button>All Courses</button></a> <a href="./Courses/CreateCourse.php"> <button>Create Course</button></a></div>
+                <div class="block">Reports : <a href="./Reports/Readers.php"><button>Readers</button></a> <a href="./Reports/Writers.php"> <button>Writers</button></a></div>
             </div>
         </section>
         <section id="Desc-Container">
@@ -131,7 +76,7 @@
                 <button>Join our Global Campus</button>
             </div>
             <div class="desc-container">
-                <h1 class="text" style="color:rgb(155,155,250)">We've got covered</h1>
+                <h1 class="text" style="color:rgb(155,155,250)">We've got you covered</h1>
                 <h2 class="typing">Live Summary helps students, teachers, and schools access the tools<br/> and events they need to shape the next generation of proffesional study.</h2>
             </div>
         </section>
@@ -292,22 +237,8 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        
-        document.getElementById("activate").addEventListener('click',
-        function(){
-                var thescript = document.querySelector(".side-navo");
-                thescript.classList.toggle('display')
-            })
-document.getElementById("closero").addEventListener('click',
-            function(){
-                var thescript = document.querySelector(".side-navo");
-                thescript.classList.remove('display')
-            
-            })
+    <script src=<?php echo '"./js/script.js?' . rand() .'"'; ?>>
+   
     </script>
-    <script src="./js/script.js"></script>
-    
 </body>
 </html>
-?>

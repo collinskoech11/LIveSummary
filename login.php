@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -145,37 +145,6 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY >= 100);
-        });
-        document.getElementById("navigate").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.toggle('appear')
-            })
-            document.getElementById("closer").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.remove('appear')
-            
-            })
-        var i =0, text;
-        text = " and events they need to shape the next generation of software development."
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>

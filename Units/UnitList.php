@@ -1,14 +1,5 @@
 <?php
-    $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
-     // Check connection
-    session_start();
-    if($mysqli === false){
-        die("ERROR: Could not connect. " 
-            . mysqli_connect_error());
-    }
-    $sql = "SELECT * FROM users WHERE role='Reader'";
-    $result = $mysqli->query($sql);
-    $mysqli->close();
+include('../variables.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,62 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .tab-wrap{
-            border-radius:20px;
-            background-color:rgb(0,0,20 );
-            width:90%;
-            margin:auto;
-            margin-top:20px;
-            padding-top:10px;
-            padding-left:30px;
-            padding-right:30px;
-            padding-bottom:20px;
-            height:auto;
-            text-align:center;
-            color:#fff;
-            
-        }
-        .tab-wrap table{
-            margin:auto;
-            margin-top:30px;
-        }
-        .tab-wrap table tr{
-            border-top:2px solid rgb(155,155,250);
-        }
-        .tab-wrap table th,td{
-            border-left:2px solid rgb(155,155,250);
-            border-top:3px solid rgb(155,155,250);
-            height: 50px;
-            width:250px;
-            text-align: center;
-            color:#fff;
-            
-        }
-        .tab-wrap table .Bend{
-            border-top-left-radius:10px;
-        }
-        .tab-wrap table  .Closet{
-            border-right:2px solid rgb(155,155,250);
-        }
-        .tab-wrap table  th .Close{
-            border-top-right-radius:10px;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="../css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
         <section id="HeaderContainer">
-            <div class="header-container">
+            <div class="header-container fixed" style="margin-bottom:70px;">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
                     <a href="/Read"><button>Reader</button></a>
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="#"><button class="sign"><?php echo $_SESSION['username'];?></button></a>
+                    <a href="/SignIn"><button class="sign"><?php echo $Naming; ?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -99,33 +47,45 @@
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $_SESSION['username'];?></button>
+                    <button><?php echo $Naming; ?></button>
                 </div>
             </div>
         </section>
-        <section class="tab-container">
-            <div class="tab-wrap">
-                <h2>Readers in the System</h2>
-                <table>
-                    <tr>
-                        <th class="Bend">User Registration No</th>
-                        <th>Username</th>
-                        <th>Course</th>
-                        <th>Email</th>
-                    </tr>
-                    <?php 
-                        while($rows=$result->fetch_assoc()){
-                    ?>
-                    <tr>
-                        <td><?php echo $rows['user_id']?></td>
-                        <td><?php echo $rows['username']?></td>
-                        <td><?php echo $rows['Course']?></td>
-                        <td><?php echo $rows['email']?>@gmail.com</td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                </table>
+        <?php
+            $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+              // Check connection
+             if($mysqli === false){
+                 die("ERROR: Could not connect. " 
+                     . mysqli_connect_error());
+             }
+             $sql = "SELECT * FROM units";
+             $result = $mysqli->query($sql);
+             $mysqli->close();
+
+        ?>
+        <section id="BodyContainer">
+            <div class="body-con" style="margin-top:70px;">    
+                <?php
+                while($rows=$result->fetch_assoc()){
+                ?>   
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h3 class="card-title"><?php echo $rows['unit_title'];?></h3> <br/>
+                            <h4 class="card-title"><?php echo $rows['faculty'];?></h4> 
+                            <h4 class="card-title"><?php echo $rows['Course'];?></h4> 
+                            <div class="card-subtitle text-muted mb-2"> <?php echo $rows['created_at'];?></div>
+                            <div class="btn-container">
+                                <button class="read"><a href="articles/<%= article.slug %>" class="btn btn-primary">Read full article</a></button>
+                                <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
+                                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-danger delete">DELETE</button>
+                                </form> -->
+                            </div>
+                        </div>      
+                    </div>
+                <?php
+                    }
+                ?>
             </div>
         </section>
         <section class="FooterContainer">
@@ -181,37 +141,6 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY >= 100);
-        });
-        document.getElementById("navigate").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.toggle('appear')
-            })
-            document.getElementById("closer").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.remove('appear')
-            
-            })
-        var i =0, text;
-        text = " and events they need to shape the next generation of software development."
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>
