@@ -65,7 +65,8 @@ $UnitTitle=$_GET['idt'];
 
         ?>
         <section id="BodyContainer">
-            <div class="body-con" style="margin-top:70px;">    
+            <div class="body-con" style="margin-top:70px;">  
+            <h2><?php echo $UnitTitle;?></h2>    
                 <?php
                 while($rows=$result->fetch_assoc()){
                 ?>   
