@@ -1,4 +1,15 @@
 <?php
+include('../variables.php');
+    $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+     // Check connection
+    session_start();
+    if($mysqli === false){
+        die("ERROR: Could not connect. " 
+            . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM users WHERE role='Reader'";
+    $result = $mysqli->query($sql);
+    $mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/style.css?<?php echo time();?>">
+    <link rel="stylesheet" href="../css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -15,11 +26,11 @@
             <div class="header-container">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
-                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
-                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
-                    <a href="Benefits.php"><button>Benefits</button></a>
-                    <a href="Contact.php"><button>Contact us</button></a>
-                    <a href="Login.php"><button class="sign">Sign in</button></a>
+                    <a href="/Read"><button>Reader</button></a>
+                    <a href="/Write"><button>Writer</button></a>
+                    <a href="/Benefits"><button>Benefits</button></a>
+                    <a href="/Contact"><button>Contact us</button></a>
+                    <a href="#"><button class="sign"><?php echo $Naming;?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -34,63 +45,46 @@
                     <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
                 </div>
                 <div class="side-nav-btn">
-                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
+                    <button>Reader</button>
                 </div>
                 <div class="side-nav-btn">
-                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
+                    <button>Writer</button>
                 </div>
                 <div class="side-nav-btn">
-                    <a href="Benefits.php"><button>Benefits</button></a>
+                    <button>Benefits</button>
                 </div>
                 <div class="side-nav-btn">
-                    <a href="Contact.php"><button>Contact</button></a>
+                    <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <a href="Login.php"><button>Sign in</button></a>
+                    <button><?php echo $Naming;?></button>
                 </div>
             </div>
         </section>
-        <section class="contentForm">
-        <?php
-            include('./Database/db.php');
-            session_start();
-            if (isset($_REQUEST['username'])){
-                $username = stripslashes($_REQUEST['username']);//removers slashes 
-                $username = mysqli_real_escape_string($conn, $username);//removes any other special characters 
-                $password = stripslashes($_REQUEST['password']);
-                $password = mysqli_real_escape_string($conn, $password);
-
-                // Performing insert query execution
-                $sql = "SELECT * FROM `users`  WHERE username='$username' AND password='".md5($password)."'";//check in db if the provided username and password exsts in the user table
-                $result = mysqli_query($conn, $sql);
-                $rows = mysqli_num_rows($result);//convert it to row data 
-
-
-                $role = $sql['role'];// set role as $role for use in dashboard as a variable
-                $EmailOne = $sql['email'];// sets email variable for dashboard
-                $Course = $sql['Course'];// set role as $role for use in dashboard as a variable
-                if ($rows == 1) {
-                    $_SESSION['username'] = $username;//if username is valid 
-                    $_SESSION['role'] = $role;
-                    $_SESSION['email'] = $EmailOne;
-                    header("Location:./Articles/ArticleList.php");
-                } else {
-                    echo " <div class='form-container'>Invalid Username or password'<br/>
-                    <a href='Login.php'>Register</a>
-                    </div>";
-            } 
-        } else {
-        ?>
-            <div class="form-container">
-                <form name="registration" method="POST">
-                    <input type="text" placeholder="username" name="username" id="username">
-                    <input type="password" placeholder="password" name="password" id="password">
-                    <input type="submit" value="Sign In" class="sign" style="width:150px;">
-                </form>
+        <section class="tab-container">
+            <div class="tab-wrap">
+                <h2>Readers in the System</h2>
+                <table>
+                    <tr>
+                        <th class="Bend">User Registration No</th>
+                        <th>Username</th>
+                        <th>Course</th>
+                        <th>Email</th>
+                    </tr>
+                    <?php 
+                        while($rows=$result->fetch_assoc()){
+                    ?>
+                    <tr>
+                        <td><?php echo $rows['user_id']?></td>
+                        <td><?php echo $rows['username']?></td>
+                        <td><?php echo $rows['Course']?></td>
+                        <td><?php echo $rows['email']?>@gmail.com</td>
+                    </tr>
+                    <?php
+                        }
+                    ?>
+                </table>
             </div>
-        <?php
-            }
-        ?>
         </section>
         <section class="FooterContainer">
             <div class="footer-container">
@@ -145,6 +139,7 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script src="js/script.js?<?php echo time(); ?>"></script>
+    <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
+?>

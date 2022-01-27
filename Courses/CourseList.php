@@ -13,14 +13,14 @@ include('../variables.php');
 <body>
     <div class="container">
         <section id="HeaderContainer">
-            <div class="header-container">
+            <div class="header-container fixed" style="margin-bottom:70px;">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
                     <a href="/Read"><button>Reader</button></a>
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming?></button></a>
+                    <a href="/SignIn"><button class="sign"><?php echo $Naming; ?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -47,8 +47,44 @@ include('../variables.php');
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming?></button>
+                    <button><?php echo $Naming; ?></button>
                 </div>
+            </div>
+        </section>
+        <?php
+            $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+              // Check connection
+             if($mysqli === false){
+                 die("ERROR: Could not connect. " 
+                     . mysqli_connect_error());
+             }
+             $sql = "SELECT * FROM courses";
+             $result = $mysqli->query($sql);
+             $mysqli->close();
+
+        ?>
+        <section id="BodyContainer">
+            <div class="body-con" style="margin-top:70px;">    
+                <?php
+                while($rows=$result->fetch_assoc()){
+                ?>   
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h3 class="card-title"><span class="cold">Course Name : </span><?php echo $rows['course_name'];?></h3> <br/>
+                            <h4 class="card-title"><span class="cold">Course Id :</span><?php echo $rows['course_id'];?></h4> 
+                            <h4 class="card-title"><span class="cold">Faculty :</span><?php echo $rows['faculty'];?></h4> 
+                            <div class="btn-container">
+                                <button class="read"><a href="../Units/CourseSpecificList.php?idx=<?php echo $rows['course_name'];?>">View Units</a></button>
+                                <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
+                                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-danger delete">DELETE</button>
+                                </form> -->
+                            </div>
+                        </div>      
+                    </div>
+                <?php
+                    }
+                ?>
             </div>
         </section>
         <section class="FooterContainer">
@@ -107,4 +143,3 @@ include('../variables.php');
     <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>

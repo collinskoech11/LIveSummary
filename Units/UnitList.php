@@ -70,12 +70,12 @@ include('../variables.php');
                 ?>   
                     <div class="card mt-4">
                         <div class="card-body">
-                            <h3 class="card-title"><?php echo $rows['unit_title'];?></h3> <br/>
-                            <h4 class="card-title"><?php echo $rows['faculty'];?></h4> 
-                            <h4 class="card-title"><?php echo $rows['Course'];?></h4> 
+                            <h3 class="card-title"><?php echo $rows['unit_id'];?></h3> <br/>
+                            <h4 class="card-title"><?php echo $rows['unit_name'];?></h4> 
+                            <h4 class="card-title"><?php echo $rows['course_name'];?></h4> 
                             <div class="card-subtitle text-muted mb-2"> <?php echo $rows['created_at'];?></div>
                             <div class="btn-container">
-                                <button class="read"><a href="articles/<%= article.slug %>" class="btn btn-primary">Read full article</a></button>
+                                <button class="read"><a href="Articles.php?id=<?php echo $rows['unit_name'];?>" class="btn btn-primary">Read full article</a></button>
                                 <!--<button class="edit"><a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a></button>
                                 <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
                                     <button type="submit" class="btn btn-danger delete">DELETE</button>

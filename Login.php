@@ -1,5 +1,4 @@
 <?php
-include('../variables.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +7,7 @@ include('../variables.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="../css/style.css?<?php echo time();?>">
+    <link rel="stylesheet" href="./css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -16,11 +15,11 @@ include('../variables.php');
             <div class="header-container">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
-                    <a href="/Read"><button>Reader</button></a>
-                    <a href="/Write"><button>Writer</button></a>
-                    <a href="/Benefits"><button>Benefits</button></a>
-                    <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming?></button></a>
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
+                    <a href="Benefits.php"><button>Benefits</button></a>
+                    <a href="Contact.php"><button>Contact us</button></a>
+                    <a href="Login.php"><button class="sign">Sign in</button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -35,21 +34,63 @@ include('../variables.php');
                     <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Reader</button>
+                    <a href="Articles/ArticleList.php"><button>Reader</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Writer</button>
+                    <a href="Articles/ArticleList.php"><button>Writer</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Benefits</button>
+                    <a href="Benefits.php"><button>Benefits</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Contact</button>
+                    <a href="Contact.php"><button>Contact</button></a>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming?></button>
+                    <a href="Login.php"><button>Sign in</button></a>
                 </div>
             </div>
+        </section>
+        <section class="contentForm">
+        <?php
+            include('./Database/db.php');
+            session_start();
+            if (isset($_REQUEST['username'])){
+                $username = stripslashes($_REQUEST['username']);//removers slashes 
+                $username = mysqli_real_escape_string($conn, $username);//removes any other special characters 
+                $password = stripslashes($_REQUEST['password']);
+                $password = mysqli_real_escape_string($conn, $password);
+
+                // Performing insert query execution
+                $sql = "SELECT * FROM `users`  WHERE username='$username' AND password='".md5($password)."'";//check in db if the provided username and password exsts in the user table
+                $result = mysqli_query($conn, $sql);
+                $rows = mysqli_num_rows($result);//convert it to row data 
+
+
+                $role = $sql['role'];// set role as $role for use in dashboard as a variable
+                $EmailOne = $sql['email'];// sets email variable for dashboard
+                $Course = $sql['Course'];// set role as $role for use in dashboard as a variable
+                if ($rows == 1) {
+                    $_SESSION['username'] = $username;//if username is valid 
+                    $_SESSION['role'] = $role;
+                    $_SESSION['email'] = $EmailOne;
+                    header("Location:./Courses/CourseList.php");
+                } else {
+                    echo " <div class='form-container'>Invalid Username or password'<br/>
+                    <a href='Login.php'>Register</a>
+                    </div>";
+            } 
+        } else {
+        ?>
+            <div class="form-container">
+                <form name="registration" method="POST">
+                    <input type="text" placeholder="username" name="username" id="username">
+                    <input type="password" placeholder="password" name="password" id="password">
+                    <input type="submit" value="Sign In" class="sign" style="width:150px;">
+                </form>
+            </div>
+        <?php
+            }
+        ?>
         </section>
         <section class="FooterContainer">
             <div class="footer-container">
@@ -104,7 +145,6 @@ include('../variables.php');
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script src="../js/script.js?<?php echo time(); ?>"></script>
+    <script src="js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>

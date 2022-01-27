@@ -18,50 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .tab-wrap{
-            border-radius:20px;
-            background-color:rgb(0,0,20 );
-            width:90%;
-            margin:auto;
-            margin-top:20px;
-            padding-top:10px;
-            padding-left:30px;
-            padding-right:30px;
-            padding-bottom:20px;
-            height:auto;
-            text-align:center;
-            color:#fff;
-            
-        }
-        .tab-wrap table{
-            margin:auto;
-            margin-top:30px;
-        }
-        .tab-wrap table tr{
-            border-top:2px solid rgb(155,155,250);
-        }
-        .tab-wrap table th,td{
-            border-left:2px solid rgb(155,155,250);
-            border-top:3px solid rgb(155,155,250);
-            height: 50px;
-            width:200px;
-            text-align: center;
-            color:#fff;
-            
-        }
-        .tab-wrap table .Bend{
-            border-top-left-radius:10px;
-        }
-        .tab-wrap table  .Closet{
-            border-right:2px solid rgb(155,155,250);
-        }
-        .tab-wrap table  th .Close{
-            border-top-right-radius:10px;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="../css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -183,37 +140,7 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY >= 100);
-        });
-        document.getElementById("navigate").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.toggle('appear')
-            })
-            document.getElementById("closer").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.remove('appear')
-            
-            })
-        var i =0, text;
-        text = " and events they need to shape the next generation of software development."
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
 ?>

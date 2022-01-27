@@ -1,5 +1,6 @@
 <?php
 include('../variables.php');
+$UnitTitle=$_GET['idt'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,14 +14,14 @@ include('../variables.php');
 <body>
     <div class="container">
         <section id="HeaderContainer">
-            <div class="header-container">
+            <div class="header-container fixed" style="margin-bottom:70px;">
                 <div class="title"><h1 class="mb-4">Live Summary</h1></div>
                 <div class="title-buttons">
                     <a href="/Read"><button>Reader</button></a>
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming?></button></a>
+                    <a href="/SignIn"><button class="sign"><?php echo $Naming; ?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -32,7 +33,7 @@ include('../variables.php');
         <section class="SideNav">
             <div class="side-nav">
                 <div class="side-nav-close">
-                    <div class="close-btn" id="closer"><img src="./img/close.png" alt=""></div>
+                    <div class="close-btn" id="closer"><img src="../img/close.png" alt=""></div>
                 </div>
                 <div class="side-nav-btn">
                     <button>Reader</button>
@@ -47,9 +48,41 @@ include('../variables.php');
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming?></button>
+                    <button><?php echo $Naming; ?></button>
                 </div>
             </div>
+        </section>
+        <?php
+            $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+              // Check connection
+             if($mysqli === false){
+                 die("ERROR: Could not connect. " 
+                     . mysqli_connect_error());
+             }
+             $sql = "SELECT * FROM articles WHERE unit_title='$UnitTitle'";
+             $result = $mysqli->query($sql);
+             $mysqli->close();
+
+        ?>
+        <section id="BodyContainer">
+            <div class="body-con" style="margin-top:70px;">    
+                <?php
+                while($rows=$result->fetch_assoc()){
+                ?>   
+                    <div class="card mt-4" style="width:100%;">
+                        <div class="card-body">
+                            
+                            <h4 class="card-title"><?php echo $rows['article_title'];?></h4> 
+                            <div class="card-subtitle text-muted mb-2"> <?php echo $rows['article_body'];?></div>
+                            
+                        </div>      
+                    </div>
+                <?php
+                    }
+                ?>
+                <a href="../Dashboard/index.php"> <button class="sign">Dashboard</button></a>
+            </div>
+        
         </section>
         <section class="FooterContainer">
             <div class="footer-container">
@@ -107,4 +140,3 @@ include('../variables.php');
     <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>

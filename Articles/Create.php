@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include('../variables.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,42 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        /* .form-container{
-            width:100%;
-            height:auto;
-            padding:50px;
-        }
-        @media screen and (max-width:1000px){
-            .form-container{
-                padding:20px;
-            }
-        }
-        .form-container form{
-            width:100%;
-        }
-        .form-container form input{
-            width:100%;
-            margin-bottom:40px;
-            height:50px;
-            background-color:rgb(0,0,10);
-            border: 3px solid rgb(155,155,250);
-            border-radius:5px;
-            padding-left:13px;
-            color:#fff;
-
-        }
-        .form-container form textarea{
-            width:100%;
-            height:500px;
-            background-color:rgb(0,0,10);
-            border: 3px solid rgb(155,155,250);
-            border-radius:5px;
-            padding:13px;
-            color:#fff;
-        } */
-    </style>
+    <link rel="stylesheet" href="../css/style.css?<?php echo time();?>">
 </head>
 <body>
     <div class="container">
@@ -56,7 +22,7 @@
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="#"><button class="sign"><?php echo $_SESSION['username'];?></button></a>
+                    <a href="#"><button class="sign"><?php echo $Naming;?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -83,7 +49,7 @@
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button>Sign in</button>
+                    <button><?php echo $Naming?></button>
                 </div>
             </div>
         </section>
@@ -98,8 +64,9 @@
                 $article_body = $_REQUEST['content'];
                 $unit_title = $_REQUEST['unit_title'];
                 $created_at = $_REQUEST['created_at'];
+                $course = $_REQUEST['course'];
 
-                $sql = "INSERT INTO articles VALUES ('$article_id','$user_id','$username','$article_title','$article_body','$created_at','$unit_title')";
+                $sql = "INSERT INTO articles VALUES ('$article_id','$user_id','$username','$article_title','$article_body','$created_at','$unit_title','$course')";
                 $result = mysqli_query($conn, $sql);
 
                 if ($result){
@@ -113,10 +80,11 @@
                 }
             } else {
             ?>
-            <div class="form-container">
+            <div class="form-container" style="margin-top:50px;">
                 <form name="Create_Article" method="POST">
-                <input type="number" placeholder="User ID" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'];?>">
+                    <input type="number" name="user_id" id="user_id" placeholder="User Reg no">
                     <input type="number" placeholder="Article ID" name="article_id" id="article_id">
+                    <input type="text" placeholder="Course" name="course" id="cousre">
                     <input type="text" placeholder="Unit Title" name="unit_title" id="unit_title">
                     <input type="text" placeholder="Article Title" name="article_title" id="article_title">
                     <textarea name="content" id="content" cols="30" rows="10" placeholder="Your content goes here :" >
@@ -183,37 +151,6 @@
         </section>
      <!--   <a href="/articles/new" class="btn btn-success">New Article</a>-->
     </div>
-    <script>
-        window.addEventListener('scroll', 
-        function(){
-            var tophead = document.querySelector('.header-container');
-            tophead.classList.toggle('fixed', window.scrollY >= 100);
-        });
-        document.getElementById("navigate").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.toggle('appear')
-            })
-            document.getElementById("closer").addEventListener('click',
-            function(){
-                var thenav = document.querySelector(".side-nav");
-                thenav.classList.remove('appear')
-            
-            })
-        var i =0, text;
-        text = " and events they need to shape the next generation of software development."
-        function typing(){
-          
-                if(i<text.length){
-                    document.getElementById('text').innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing,200); 
-                }
-             
-        }
-        typing();
-        console.log('hello')
-    </script>
+    <script src="../js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
-?>

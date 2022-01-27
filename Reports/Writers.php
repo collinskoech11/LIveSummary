@@ -1,5 +1,15 @@
 <?php
-include('../variables.php');
+    $mysqli = new mysqli("localhost", "root", "", "LiveSummaryDb");
+    include('../variables.php');
+     // Check connection
+    session_start();
+    if($mysqli === false){
+        die("ERROR: Could not connect. " 
+            . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM users WHERE role='Writer'";
+    $result = $mysqli->query($sql);
+    $mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +30,7 @@ include('../variables.php');
                     <a href="/Write"><button>Writer</button></a>
                     <a href="/Benefits"><button>Benefits</button></a>
                     <a href="/Contact"><button>Contact us</button></a>
-                    <a href="/SignIn"><button class="sign"><?php echo $Naming?></button></a>
+                    <a href="#"><button class="sign"><?php echo $Naming;?></button></a>
                 </div>
                 <div class="title-nav-btn" id="navigate">
                     <div class="nav-line"></div>   
@@ -47,8 +57,33 @@ include('../variables.php');
                     <button>Contact</button>
                 </div>
                 <div class="side-nav-btn">
-                    <button><?php echo $Naming?></button>
+                    <button><?php echo $Naming;?></button>
                 </div>
+            </div>
+        </section>
+        <section class="tab-container">
+            <div class="tab-wrap">
+                <h2>Writers in the system</h2>
+                <table>
+                    <tr>
+                        <th class="Bend">User Registration No</th>
+                        <th>Username</th>
+                        <th>Course</th>
+                        <th>Email</th>
+                    </tr>
+                    <?php 
+                        while($rows=$result->fetch_assoc()){
+                    ?>
+                    <tr>
+                        <td><?php echo $rows['user_id']?></td>
+                        <td><?php echo $rows['username']?></td>
+                        <td><?php echo $rows['Course']?></td>
+                        <td><?php echo $rows['email']?>@gmail.com</td>
+                    </tr>
+                    <?php
+                        }
+                    ?>
+                </table>
             </div>
         </section>
         <section class="FooterContainer">
