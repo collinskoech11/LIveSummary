@@ -50,6 +50,21 @@
                 </div>
             </div>
         </section>
+        <section class="btn-swapping">
+            <div class="btn-swap">
+                <button class="sign" id="activate" >More</button>
+            </div>
+        </section>
+        <section class="SideNav">
+            <div class="side-navo">
+                <div class="block"><button id="closero" style="color:#fff; font-weight: bold; text-transform: uppercase;">Close</button></div>
+                <div class="block">Tables : <a href="./Tables/Users.php"><button>Users</button></a> <a href="./Tables/Articles.php"> <button>Articles</button></a><a href="./Tables/Courses"> <button>Courses</button></a><a href="./Tables/Units.php"><button>Units</button></a></div>
+                <div class="block">Units : <a href="./Units/UnitList.php"><button>All Units</button></a> <a href="./Units/CreateUnit.php"> <button>Create Unit</button></a></div>
+                <div class="block">Articles : <a href="./Articles/ArticleList.php"><button>All Articles</button></a> <a href="./Articles/CreateArticle.php"> <button>Write Article</button> </a></div>
+                <div class="block">Courses : <a href="./Courses/CourseList.php"><button>All Courses</button></a> <a href="./Courses/CreateCourse.php"> <button>Create Course</button></a></div>
+                <div class="block">Reports : <a href="./Reports/Readers.php"><button>Readers</button></a> <a href="./Reports/Writers.php"> <button>Writers</button></a></div>
+            </div>
+        </section>
         <section id="Desc-Container">
             <div class="desc-container">
                 <h1 class="text" style="color:rgb(155,155,250)">Get started with study</h1>
