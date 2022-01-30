@@ -68,10 +68,18 @@ section{
     width:50%;
     height:100%;
     background-color:rgb(0,0,10);
-    padding:10px;
+    
     text-align:left;
-    color:rgb(155,155,250)
+    color:rgb(155,155,250);
+    /* margin-top:-30px; */
 }
+.header-container .title-buttons a{
+    height:100px;
+    width:100px;
+}
+/* .header-container .title-buttons a button{
+    margin-top:-30px;
+} */
 .header-container .title-nav-btn{
     display:none;
     background-color:rgb(0,0,10);
@@ -80,9 +88,10 @@ section{
     padding:15px;
     cursor:pointer;
 }
-@media screen and (max-width:800px){
+@media screen and (max-width:1000px){
     .header-container .title{
         width:80%;
+        padding-left:20px;
     }
     .header-container .title-nav-btn{
         width:20%;
@@ -99,6 +108,46 @@ section{
 .header-container .title-nav-btn:hover .nav-line{
     background-color:#fff;
     transition:1s;
+}
+
+
+
+.header-container .title-buttons button{
+    width:100px;
+    height:50px;
+    border:none;
+    background-color: transparent;
+    color:rgb(155,155,250);
+    font-weight: bold;
+    text-transform: capitalize;
+    cursor:pointer;
+}
+.header-container .title-buttons .signo{
+    border:3px solid rgb(155,155,250); 
+    border-radius: 5px;
+}
+.header-container h1{
+    margin:auto;
+}
+/** Header Navigation
+########################################################################################################################################
+*/
+@media screen and (max-width:1000px){
+    .header-container .title{
+        width:88%;
+        
+    }
+    .header-container .title-buttons{
+        display:none;
+    }
+    .header-container .title-nav-btn{
+        display:block;
+       
+    }
+    .header-container .title-nav-btn .nav-line{
+        width:100%;
+        height:5px;
+    }
 }
 /** Side Navigation
 ########################################################################################################################################
@@ -233,44 +282,7 @@ section{
     margin: auto;
     margin-top: 20px; 
 }
-/** Header Navigation
-########################################################################################################################################
-*/
-@media screen and (max-width:1000px){
-    .header-container .title{
-        width:88%;
-        padding-left:20px;
-    }
-    .header-container .title-buttons{
-        display:none;
-    }
-    .header-container .title-nav-btn{
-        display:block;
-       
-    }
-    .header-container .title-nav-btn .nav-line{
-        width:100%;
-        height:5px;
-    }
-}
 
-.header-container .title-buttons button{
-    width:100px;
-    height:100%;
-    border:none;
-    background-color: transparent;
-    color:rgb(155,155,250);
-    font-weight: bold;
-    text-transform: capitalize;
-    cursor:pointer
-}
-.header-container .title-buttons .sign{
-    border:3px solid rgb(155,155,250); 
-    border-radius: 5px;
-}
-.header-container h1{
-    margin:auto;
-}
 /** Description Container 
 ########################################################################################################################################
 */
