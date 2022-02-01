@@ -52,7 +52,7 @@
             </div>
         </section>
         <section class="BodyContainer">
-            <div class="user" style="margin-top:75px;display:flex">
+            <div class="body-con" style="margin-top:75px;display:flex">
             <?php 
                         while($rowuser=$resultuser->fetch_assoc()){
 
